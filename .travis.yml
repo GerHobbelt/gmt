@@ -2,10 +2,15 @@ language: c
 
 sudo: required
 
+services:
+  - docker
+
 branches:
     only:
+        # CI Development Branches
+        - ci\//.*/
         - master
-        - 5.4
+        - 5.41
         # Regex to build tagged commits with version numbers
         - /\d+\.\d+(\.\d+)?(\S*)?$/
 
@@ -13,24 +18,12 @@ os:
     - linux
     #- osx
 
-env:
-    global:
-        - INSTALLDIR="$HOME/gmt-install-dir"
-        - COASTLINEDIR="$HOME/gmt-install-dir/coast"
-        - PATH="$INSTALLDIR/bin:$PATH"
-        - LD_LIBRARY_PATH="$INSTALLDIR/lib:$LD_LIBRARY_PATH"
-
-before_install:
-    # Install GMT dependencies
-    - bash ci/travis-setup.sh
-
 install:
-    # Build and install GMT
-    - bash ci/travis-build.sh;
-
+    - docker build --tag gmt .
+    
 script:
-    - gmt defaults -Vd
-    - gmt pscoast -R0/10/0/10 -JM6i -Ba -Ggray -P -Vd > test.ps
+    - docker run --rm gmt defaults -Vd
+    - docker run --rm gmt pscoast -R0/10/0/10 -JM6i -Ba -Ggray -P -Vd > test.ps
 
 
 notifications:
