@@ -41,6 +41,7 @@ ENV GMT_DCW_FTP=ftp://ftp.soest.hawaii.edu/dcw/dcw-gmt-$DCW_VERSION.tar.gz \
 RUN   mkdir -p $GMT_INSTALL_DIR				 &&\
       cd $GMT_INSTALL_DIR			 	 &&\
       wget $GMT_DCW_FTP					 &&\
+      sleep 5						 &&\
       wget $GMT_GSHHG_FTP		 		 &&\
       tar -xzf gshhg-gmt-$GSHHG_VERSION.tar.gz 		 &&\
       tar -xzf dcw-gmt-$DCW_VERSION.tar.gz 		 &&\
