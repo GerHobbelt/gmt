@@ -41,11 +41,12 @@ ENV GMT_DCW_FTP=ftp://ftp.soest.hawaii.edu/dcw/dcw-gmt-$DCW_VERSION.tar.gz \
 RUN   mkdir -p $GMT_INSTALL_DIR				 &&\
       cd $GMT_INSTALL_DIR			 	 &&\
       wget $GMT_DCW_FTP					 &&\
+      tar -xzf dcw-gmt-$DCW_VERSION.tar.gz 		 &&\
+      rm -f *.tar.gz                 	    		 &&\
       sleep 5						 &&\
       wget $GMT_GSHHG_FTP		 		 &&\
       tar -xzf gshhg-gmt-$GSHHG_VERSION.tar.gz 		 &&\
-      tar -xzf dcw-gmt-$DCW_VERSION.tar.gz 		 &&\
-      rm -f *.tar.gz                       		   
+      rm -f *.tar.gz                      		   
     
 ## Part 3: Copy and Build GMT
 

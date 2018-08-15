@@ -1,4 +1,7 @@
-language: c
+language: generic
+
+git:
+  depth: 3
 
 sudo: required
 
@@ -8,15 +11,14 @@ services:
 branches:
     only:
         # CI Development Branches
-        - ci/*
-        - master
+        - /ci//.*/
+        - master1
         - 5.41
         # Regex to build tagged commits with version numbers
         - /\d+\.\d+(\.\d+)?(\S*)?$/
 
 os:
     - linux
-    #- osx
 
 addons:
   apt:
@@ -24,7 +26,9 @@ addons:
       - docker-ce
     
 install:
+    - df -h
     - docker build --tag gmt .
+    - df -h
     
 script:
     - docker run --rm gmt defaults -Vd
