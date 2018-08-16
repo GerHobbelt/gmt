@@ -42,13 +42,17 @@ RUN apt-get update					 &&\
 ARG GSHHG_VERSION=2.3.7
 ARG DCW_VERSION=1.1.4
 ARG GMT_INSTALL_DIR=/opt/gmt
-ENV GMT_DCW_FTP=ftp://ftp.soest.hawaii.edu/dcw/dcw-gmt-$DCW_VERSION.tar.gz \
-    GMT_GSHHG_FTP=ftp://ftp.soest.hawaii.edu/gshhg/gshhg-gmt-$GSHHG_VERSION.tar.gz
+#ENV GMT_DCW_FTP=ftp://ftp.soest.hawaii.edu/dcw/dcw-gmt-$DCW_VERSION.tar.gz \
+#    GMT_GSHHG_FTP=ftp://ftp.soest.hawaii.edu/gshhg/gshhg-gmt-$GSHHG_VERSION.tar.gz
+ENV GMT_DCW_HTTP=http://www.soest.hawaii.edu/pwessel/dcw/dcw-gmt-$DCW_VERSION.tar.gz \
+    GMT_GSHHG_HTTP=http://www.soest.hawaii.edu/pwessel/gshhg/gshhg-gmt-$GSHHG_VERSION.tar.gz
 
 RUN   mkdir -p $GMT_INSTALL_DIR				 &&\
       cd $GMT_INSTALL_DIR			 	 &&\
-      wget $GMT_DCW_FTP					 &&\
-      wget $GMT_GSHHG_FTP		 		 &&\
+#      wget $GMT_DCW_FTP				  &&\
+#      wget $GMT_GSHHG_FTP		 		  &&\
+      wget $GMT_DCW_HTTP				 &&\
+      wget $GMT_GSHHG_HTTP				 &&\
       tar -xzf gshhg-gmt-$GSHHG_VERSION.tar.gz 		 &&\
       tar -xzf dcw-gmt-$DCW_VERSION.tar.gz 		 &&\
       rm -f *.tar.gz                       		   
